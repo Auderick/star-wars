@@ -19,4 +19,16 @@ class HomeController extends AbstractController
             'personnages' => $personnage->toArray()['results'],
         ]);
     }
+
+    /*Création d'une route pour afficher un personnage.*/
+    /* On peut utiliser le paramètre requirements pour spécifier que l'id doit être un nombre.*/
+    #[Route('/personnage/{id}', name: 'app_personnage', requirements: ['id' => '\d+'])]
+    public function personnage(int $id, HttpClientInterface $httpClientInterface): Response
+    {
+        $personnage = $httpClientInterface->request('GET', 'https://swapi.py4e.com/api/people/'.$id);
+        
+        return $this->render('home/personnage.html.twig', [
+            'personnage' => $personnage->toArray(),
+        ]);
+    }
 }
