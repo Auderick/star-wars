@@ -22,6 +22,7 @@ class HomeController extends AbstractController
 
     /*Création d'une route pour afficher un personnage.*/
     /* On peut utiliser le paramètre requirements pour spécifier que l'id doit être un nombre.*/
+    
     #[Route('/personnage/{id}', name: 'app_personnage', requirements: ['id' => '\d+'])]
     public function personnage(int $id, HttpClientInterface $httpClientInterface): Response
     {
